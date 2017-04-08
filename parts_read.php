@@ -24,6 +24,8 @@
     <meta charset="utf-8">
     <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<title>Read Part</title>
 </head>
  
 <body>
@@ -39,7 +41,7 @@
                         <label class="control-label">Name</label>
                         <div class="controls">
                             <label class="checkbox">
-                                <?php echo $data['name'];?>
+                                <?php echo $data['partName'];?>
                             </label>
                         </div>
                       </div>

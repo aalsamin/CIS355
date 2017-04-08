@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<title>Suppliers CRUD</title>
 </head>
  
 <body>
@@ -14,6 +16,9 @@
             <div class="row">
 			    <p>
                     <a href="suppliers_create.php" class="btn btn-success">Create</a>
+                </p>
+				<p>
+                    <a href="1project.php" class="btn btn-success">Main Page</a>
                 </p>
                 <table class="table table-striped table-bordered">
                   <thead>
@@ -30,7 +35,7 @@
                    $sql = 'SELECT * FROM suppliers ORDER BY id DESC';
                    foreach ($pdo->query($sql) as $row) {
                             echo '<tr>';
-                            echo '<td>'. $row['name'] . '</td>';
+                            echo '<td>'. $row['suppName'] . '</td>';
                             echo '<td>'. $row['email'] . '</td>';
                             echo '<td>'. $row['mobile'] . '</td>';
 							echo '<td width=250>';

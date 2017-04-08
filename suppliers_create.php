@@ -5,19 +5,19 @@
  
     if ( !empty($_POST)) {
         // keep track validation errors
-        $nameError = null;
+        $suppNameError = null;
         $emailError = null;
         $mobileError = null;
          
         // keep track post values
-        $name = $_POST['name'];
+        $suppName = $_POST['name'];
         $email = $_POST['email'];
         $mobile = $_POST['mobile'];
          
         // validate input
         $valid = true;
-        if (empty($name)) {
-            $nameError = 'Please enter Name';
+        if (empty($suppName)) {
+            $suppNameError = 'Please enter Name';
             $valid = false;
         }
          
@@ -38,9 +38,9 @@
         if ($valid) {
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO suppliers (name,email,mobile) values(?, ?, ?)";
+            $sql = "INSERT INTO suppliers (suppName,email,mobile) values(?, ?, ?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($name,$email,$mobile));
+            $q->execute(array($suppName,$email,$mobile));
             Database::disconnect();
             header("Location: suppliers_crud.php");
         }
@@ -51,6 +51,8 @@
     <meta charset="utf-8">
     <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<title>Create Supplier</title>
 </head>
  
 <body>
@@ -62,12 +64,12 @@
                     </div>
              
                     <form class="form-horizontal" action="suppliers_create.php" method="post">
-                      <div class="control-group <?php echo !empty($nameError)?'error':'';?>">
+                      <div class="control-group <?php echo !empty($suppNameError)?'error':'';?>">
                         <label class="control-label">Name</label>
                         <div class="controls">
-                            <input name="name" type="text"  placeholder="Name" value="<?php echo !empty($name)?$name:'';?>">
-                            <?php if (!empty($nameError)): ?>
-                                <span class="help-inline"><?php echo $nameError;?></span>
+                            <input name="name" type="text"  placeholder="Name" value="<?php echo !empty($suppName)?$suppName:'';?>">
+                            <?php if (!empty($suppNameError)): ?>
+                                <span class="help-inline"><?php echo $suppNameError;?></span>
                             <?php endif; ?>
                         </div>
                       </div>

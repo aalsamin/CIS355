@@ -13,21 +13,21 @@
      
     if ( !empty($_POST)) {
         // keep track validation errors
-        $nameError = null;
+        $partNameError = null;
         $descriptionError = null;
         $lengthError = null;
         $widthError = null;
          
         // keep track post values
-        $name = $_POST['name'];
+        $partName = $_POST['partName'];
         $description = $_POST['description'];
         $length = $_POST['length'];
         $width = $_POST['width'];
          
         // validate input
         $valid = true;
-        if (empty($name)) {
-            $nameError = 'Please enter Name';
+        if (empty($partName)) {
+            $partNameError = 'Please enter Name';
             $valid = false;
         }
          
@@ -50,9 +50,9 @@
         if ($valid) {
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "UPDATE parts  set name = ?, description = ?, length = ?, width =? WHERE id = ?";
+            $sql = "UPDATE parts  set partName = ?, description = ?, length = ?, width =? WHERE id = ?";
             $q = $pdo->prepare($sql);
-            $q->execute(array($name,$description,$length,$width,$id));
+            $q->execute(array($partName,$description,$length,$width,$id));
             Database::disconnect();
             header("Location: parts_crud.php");
         }
@@ -63,7 +63,7 @@
         $q = $pdo->prepare($sql);
         $q->execute(array($id));
         $data = $q->fetch(PDO::FETCH_ASSOC);
-        $name = $data['name'];
+        $partName = $data['partName'];
         $description = $data['description'];
         $length = $data['length'];
         $width = $data['width'];
@@ -76,6 +76,8 @@
     <meta charset="utf-8">
     <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<title>Update Part</title>
 </head>
  
 <body>
@@ -87,12 +89,12 @@
                     </div>
              
                     <form class="form-horizontal" action="parts_update.php?id=<?php echo $id?>" method="post">
-                      <div class="control-group <?php echo !empty($nameError)?'error':'';?>">
+                      <div class="control-group <?php echo !empty($partNameError)?'error':'';?>">
                         <label class="control-label">Name</label>
                         <div class="controls">
-                            <input name="name" type="text"  placeholder="Name" value="<?php echo !empty($name)?$name:'';?>">
-                            <?php if (!empty($nameError)): ?>
-                                <span class="help-inline"><?php echo $nameError;?></span>
+                            <input name="name" type="text"  placeholder="Name" value="<?php echo !empty($partName)?$partName:'';?>">
+                            <?php if (!empty($partNameError)): ?>
+                                <span class="help-inline"><?php echo $partNameError;?></span>
                             <?php endif; ?>
                         </div>
                       </div>

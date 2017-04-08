@@ -10,10 +10,22 @@
     } else {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
         $sql = "SELECT * FROM P_S where id = ?";
         $q = $pdo->prepare($sql);
         $q->execute(array($id));
         $data = $q->fetch(PDO::FETCH_ASSOC);
+		
+		$sql = "SELECT * FROM parts where id = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($data['part_id']));
+        $partData = $q->fetch(PDO::FETCH_ASSOC);
+		
+		$sql = "SELECT * FROM suppliers where id = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($data['supp_id']));
+        $suppData = $q->fetch(PDO::FETCH_ASSOC);
+		
         Database::disconnect();
     }
 ?>
@@ -24,6 +36,8 @@
     <meta charset="utf-8">
     <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<title>Read PS</title>
 </head>
  
 <body>
@@ -36,18 +50,18 @@
                      
                     <div class="form-horizontal" >
                       <div class="control-group">
-                        <label class="control-label">Part ID</label>
+                        <label class="control-label">Part Name</label>
                         <div class="controls">
                             <label class="checkbox">
-                                <?php echo $data['part_id'];?>
+                                <?php echo $partData['partName'];?>
                             </label>
                         </div>
                       </div>
                       <div class="control-group">
-                        <label class="control-label">Supplier ID</label>
+                        <label class="control-label">Supplier Name</label>
                         <div class="controls">
                             <label class="checkbox">
-                                <?php echo $data['supp_id'];?>
+                                <?php echo $suppData['suppName'];?>
                             </label>
                         </div>
                       </div>

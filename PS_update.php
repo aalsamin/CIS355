@@ -17,24 +17,30 @@
         $supp_idError = null;
         $priceError = null;
         $delivery_daysError = null;
+		
+		$exPartError = null;
+		$exSuppError = null;
          
         // keep track post values
-        $part_id = $_POST['part_id'];
-        $supp_id = $_POST['supp_id'];
+        //$part_id = $_POST['part_id'];
+        //$supp_id = $_POST['supp_id'];
         $price = $_POST['price'];
         $delivery_days = $_POST['delivery_days'];
+		
+		$exPart = $_POST['exPart'];
+		$exSupp = $_POST['exSupp'];
          
         // validate input
         $valid = true;
-        if (empty($part_id)) {
-            $part_idError = 'Please enter Part ID';
-            $valid = false;
-        }
-         
-        if (empty($supp_id)) {
-            $supp_idError = 'Please enter Supplier ID';
-            $valid = false;
-        }
+        //if (empty($part_id)) {
+        //    $part_idError = 'Please enter Part Name';
+        //    $valid = false;
+        //}
+        // 
+        //if (empty($supp_id)) {
+        //    $supp_idError = 'Please enter Supplier Name';
+        //    $valid = false;
+        //}
          
         if (empty($price)) {
             $priceError = 'Please enter Price';
@@ -52,7 +58,7 @@
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = "UPDATE P_S  set part_id = ?, supp_id = ?, price = ?, delivery_days =? WHERE id = ?";
             $q = $pdo->prepare($sql);
-            $q->execute(array($part_id,$supp_id,$price,$delivery_days,$id));
+            $q->execute(array($exPart,$exSupp,$price,$delivery_days,$id));
             Database::disconnect();
             header("Location: PS_crud.php");
         }
@@ -63,8 +69,8 @@
         $q = $pdo->prepare($sql);
         $q->execute(array($id));
         $data = $q->fetch(PDO::FETCH_ASSOC);
-        $part_id = $data['part_id'];
-        $supp_id = $data['supp_id'];
+        $exPart = $data['part_id'];
+        $exSupp = $data['supp_id'];
         $price = $data['price'];
         $delivery_days = $data['delivery_days'];
         Database::disconnect();
@@ -76,6 +82,8 @@
     <meta charset="utf-8">
     <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<title>Update PS</title>
 </head>
  
 <body>
@@ -87,22 +95,54 @@
                     </div>
              
                     <form class="form-horizontal" action="PS_update.php?id=<?php echo $id?>" method="post">
-                      <div class="control-group <?php echo !empty($part_idError)?'error':'';?>">
-                        <label class="control-label">Part ID</label>
+                      <div class="control-group">
+                        <label class="control-label">Part Name</label>
                         <div class="controls">
-                            <input name="part_id" type="text"  placeholder="Part ID" value="<?php echo !empty($part_id)?$part_id:'';?>">
-                            <?php if (!empty($part_idError)): ?>
-                                <span class="help-inline"><?php echo $part_idError;?></span>
-                            <?php endif; ?>
+                            <?php
+							$pdo = Database::connect();
+							$sql = 'SELECT * FROM parts ORDER BY partName ASC';
+							
+							echo "<select class='form-control' name='exPart' id='part_id'>";
+							//if($eventid) // if $_GET exists restrict person options to logged in user
+								foreach ($pdo->query($sql) as $row) {
+									//if($personid==$row['id'])
+									if($row["id"]==$exPart)
+										echo "<option selected value='" . $row['id'] . " '> " . $row['partName'] . "</option>";
+									else
+										echo "<option value='" . $row['id'] . " '> " . $row['partName'] . "</option>";
+								}
+							//else
+								//foreach ($pdo->query($sql) as $row) 
+									//echo "<option value='" . $row['id'] . " '> " . $row['name'] . "</option>";
+								//}
+							echo "</select>";
+							Database::disconnect();
+						  ?>
                         </div>
                       </div>
                       <div class="control-group <?php echo !empty($supp_idError)?'error':'';?>">
-                        <label class="control-label">Supplier ID</label>
+                        <label class="control-label">Supplier Name</label>
                         <div class="controls">
-                            <input name="supp_id" type="text" placeholder="Supplier ID" value="<?php echo !empty($supp_id)?$supp_id:'';?>">
-                            <?php if (!empty($supp_idError)): ?>
-                                <span class="help-inline"><?php echo $supp_idError;?></span>
-                            <?php endif;?>
+                            <?php
+							$pdo = Database::connect();
+							$sql = 'SELECT * FROM suppliers ORDER BY suppName ASC';
+							
+							echo "<select class='form-control' name='exSupp' id='supp_id'>";
+							//if($eventid) // if $_GET exists restrict person options to logged in user
+								foreach ($pdo->query($sql) as $row) {
+									//if($personid==$row['id'])
+									if($row["id"]==$exSupp)
+										echo "<option selected value='" . $row['id'] . " '> " . $row['suppName'] . "</option>";
+									else
+										echo "<option value='" . $row['id'] . " '> " . $row['suppName'] . "</option>";
+								}
+							//else
+								//foreach ($pdo->query($sql) as $row) 
+									//echo "<option value='" . $row['id'] . " '> " . $row['name'] . "</option>";
+								//}
+							echo "</select>";
+							Database::disconnect();
+						  ?>
                         </div>
                       </div>
                       <div class="control-group <?php echo !empty($priceError)?'error':'';?>">
