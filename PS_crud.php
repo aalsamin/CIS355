@@ -31,6 +31,8 @@
                     </tr>
                   </thead>
 				  <?php
+				  session_start();
+				  
                    include 'database.php';
                    $pdo = Database::connect();
                    //$sql = 'SELECT * FROM P_S ORDER BY id DESC';

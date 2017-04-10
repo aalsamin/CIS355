@@ -8,14 +8,14 @@ if(isset($_POST['login_btn']))
     $username=$_POST['username'];
     //$password=mysql_real_escape_string($_POST['password']);
     $password=$_POST['password'];
-    //$password=md5($password); //Remember we hashed password before storing last time
+    $password=md5($password); //Remember we hashed password before storing last time
     $sql="SELECT * FROM users WHERE username='$username' AND password='$password'";
     $result=mysqli_query($db,$sql);
     if(mysqli_num_rows($result)==1)
     {
-        $_SESSION['message']="You are now Loggged In";
+        $_SESSION['message']="You are now Logged In";
         $_SESSION['username']=$username;
-        header("location:home.php");
+        header("location:PS_crud.php");
     }
    else
    {
@@ -26,12 +26,12 @@ if(isset($_POST['login_btn']))
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Register , login and logout user php mysql</title>
+  <title>Login</title>
   <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
 <div class="header">
-    <h1>Register, login and logout user php mysql</h1>
+    <h1>Login</h1>
 </div>
 <?php
     if(isset($_SESSION['message']))
@@ -56,6 +56,8 @@ if(isset($_POST['login_btn']))
      </tr>
   
 </table>
+<br>
+<a href="register.php">Click here to sign up</a>
 </form>
 </body>
 </html>
