@@ -92,7 +92,7 @@
                       <div class="control-group <?php echo !empty($partNameError)?'error':'';?>">
                         <label class="control-label">Name</label>
                         <div class="controls">
-                            <input name="name" type="text"  placeholder="Name" value="<?php echo !empty($partName)?$partName:'';?>">
+                            <input name="partName" type="text"  placeholder="Name" value="<?php echo !empty($partName)?$partName:'';?>">
                             <?php if (!empty($partNameError)): ?>
                                 <span class="help-inline"><?php echo $partNameError;?></span>
                             <?php endif; ?>

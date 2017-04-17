@@ -16,12 +16,20 @@
         $suppNameError = null;
         $emailError = null;
         $mobileError = null;
+		$pictureError = null;
          
         // keep track post values
         $suppName = $_POST['suppName'];
         $email = $_POST['email'];
         $mobile = $_POST['mobile'];
-         
+        $picture = $_POST['picture'];
+		
+		$fileName = $_FILES['userfile']['name'];
+		$tmpName  = $_FILES['userfile']['tmp_name'];
+		$fileSize = $_FILES['userfile']['size'];
+		$fileType = $_FILES['userfile']['type'];
+		$filecontent = file_get_contents($tmpName);
+		
         // validate input
         $valid = true;
         if (empty($suppName)) {
@@ -43,15 +51,27 @@
         }
          
         // update data
-        if ($valid) {
+     if ($valid) {
+		if($fileSize > 0) {
             $pdo = Database::connect();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "UPDATE suppliers set suppName = ?, email = ?, mobile =?, filename = ?,filesize = ?,filetype = ?,filecontent = ? WHERE id = ?";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($suppName,$email,$mobile,$fileName,$fileSize,$fileType,$filecontent,$id));
+            Database::disconnect();
+            header("Location: suppliers_crud.php");
+			}
+        
+		else {
+			$pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = "UPDATE suppliers  set suppName = ?, email = ?, mobile =? WHERE id = ?";
             $q = $pdo->prepare($sql);
             $q->execute(array($suppName,$email,$mobile,$id));
             Database::disconnect();
             header("Location: suppliers_crud.php");
-        }
+		}
+	}
     } else {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -83,11 +103,11 @@
                         <h3>Update a Supplier</h3>
                     </div>
              
-                    <form class="form-horizontal" action="suppliers_update.php?id=<?php echo $id?>" method="post">
+                    <form class="form-horizontal" action="suppliers_update.php?id=<?php echo $id?>" method="post" enctype="multipart/form-data">
                       <div class="control-group <?php echo !empty($suppNameError)?'error':'';?>">
                         <label class="control-label">Name</label>
                         <div class="controls">
-                            <input name="name" type="text"  placeholder="Name" value="<?php echo !empty($suppName)?$suppName:'';?>">
+                            <input name="suppName" type="text"  placeholder="Name" value="<?php echo !empty($suppName)?$suppName:'';?>">
                             <?php if (!empty($suppNameError)): ?>
                                 <span class="help-inline"><?php echo $suppNameError;?></span>
                             <?php endif; ?>
@@ -111,6 +131,15 @@
                             <?php endif;?>
                         </div>
                       </div>
+					  
+						<div class="control-group <?php echo !empty($pictureError)?'error':'';?>">
+						<label class="control-label">Picture</label>
+						<div class="controls">
+						<input type="hidden" name="MAX_FILE_SIZE" value="16000000">
+						<input name="userfile" type="file" id="userfile">
+						</div>
+						</div>
+					  
                       <div class="form-actions">
                           <button type="submit" class="btn btn-success">Update</button>
                           <a class="btn" href="suppliers_crud.php">Back</a>

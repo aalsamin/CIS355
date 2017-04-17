@@ -63,8 +63,8 @@
                         <h3>Create a Supplier</h3>
                     </div>
              
-                    <form class="form-horizontal" action="suppliers_create.php" method="post">
-                      <div class="control-group <?php echo !empty($suppNameError)?'error':'';?>">
+                    <form class="form-horizontal" action="suppliers_create.php" method="post" enctype="multipart/form-data">
+					  <div class="control-group <?php echo !empty($suppNameError)?'error':'';?>">
                         <label class="control-label">Name</label>
                         <div class="controls">
                             <input name="name" type="text"  placeholder="Name" value="<?php echo !empty($suppName)?$suppName:'';?>">

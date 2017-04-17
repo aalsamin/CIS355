@@ -32,44 +32,46 @@ if(isset($_POST['register_btn']))
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Register , login and logout user php mysql</title>
-  <link rel="stylesheet" type="text/css" href="style.css"/>
+  <title>Register</title>
+  <meta charset="utf-8">
+  <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="header">
-    <h1>Register, login and logout user php mysql</h1>
-</div>
+<div class="container">
+    <div class="span10 offset1">
+        <div class="row">
+			<h1>Register</h1>
+		</div>
 <?php
     if(isset($_SESSION['message']))
     {
-         echo "<div id='error_msg'>".$_SESSION['message']."</div>";
+         echo "<label class='control-label'><font color='red'>".$_SESSION['message']."</font></label>";
          unset($_SESSION['message']);
     }
 ?>
 <form method="post" action="register.php">
-  <table>
-     <tr>
-           <td>Username : </td>
-           <td><input type="text" name="username" class="textInput"></td>
-     </tr>
-     <tr>
-           <td>Email : </td>
-           <td><input type="email" name="email" class="textInput"></td>
-     </tr>
-      <tr>
-           <td>Password : </td>
-           <td><input type="password" name="password" class="textInput"></td>
-     </tr>
-      <tr>
-           <td>Password again: </td>
-           <td><input type="password" name="password2" class="textInput"></td>
-     </tr>
-      <tr>
-           <td></td>
-           <td><input type="submit" name="register_btn" class="Register"></td>
+
+		   <label class="control-label">Username</label>
+           <div class="controls"><input type="text" name="username" class="textInput"></div><br>
+
+		   <label class="control-label">Email</label>
+           <div class="controls"><input type="email" name="email" class="textInput"></div><br>
+
+		   <label class="control-label">Password</label>
+           <div class="controls"><input type="password" name="password" class="textInput"></div><br>
+
+		   <label class="control-label">Password again</label>
+           <div class="controls"><input type="password" name="password2" class="textInput"></div><br>
+
+           <div class="controls"><input type="submit" name="register_btn" class="btn btn-success"></div><br>
      </tr>
   
 </table>
 </form>
+</div>
+</div>
+</div>
 </body>
 </html>

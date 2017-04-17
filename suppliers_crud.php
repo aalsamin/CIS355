@@ -14,12 +14,15 @@
                 <h3>Suppliers CRUD</h3>
             </div>
             <div class="row">
+				<p>
+                    <a href="1project.php" class="btn btn-success">Main Page</a>
+					<a href="logout.php" class="btn btn-success">logout</a>
+
+                </p>
 			    <p>
                     <a href="suppliers_create.php" class="btn btn-success">Create</a>
                 </p>
-				<p>
-                    <a href="1project.php" class="btn btn-success">Main Page</a>
-                </p>
+				
                 <table class="table table-striped table-bordered">
                   <thead>
                     <tr>

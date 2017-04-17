@@ -36,6 +36,22 @@
                         <h3>Read a Supplier</h3>
                     </div>
                      
+					 <div class="control-group">
+                        <label class="control-label">Picture</label>
+                        <div class="controls">
+                            <label class="checkbox">
+							
+                                <?php
+								if($data['filesize'] > 0){
+									echo '<img height=5%; width=15%; src="data:image/jpeg;base64,'.  base64_encode( $data['filecontent']).'" />';
+								}
+								else{
+									echo '<p><font color="red">No photo</font></p>';
+								}?>
+                            </label>
+                        </div>
+                      </div>
+					 
                     <div class="form-horizontal" >
                       <div class="control-group">
                         <label class="control-label">Name</label>
@@ -45,6 +61,7 @@
                             </label>
                         </div>
                       </div>
+					  <br>
                       <div class="control-group">
                         <label class="control-label">Email Address</label>
                         <div class="controls">
@@ -53,6 +70,7 @@
                             </label>
                         </div>
                       </div>
+					  <br>
                       <div class="control-group">
                         <label class="control-label">Mobile Number</label>
                         <div class="controls">
@@ -61,6 +79,7 @@
                             </label>
                         </div>
                       </div>
+					  <br>
                         <div class="form-actions">
                           <a class="btn" href="suppliers_crud.php">Back</a>
                        </div>

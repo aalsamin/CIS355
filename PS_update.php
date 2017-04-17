@@ -102,7 +102,7 @@
 							$pdo = Database::connect();
 							$sql = 'SELECT * FROM parts ORDER BY partName ASC';
 							
-							echo "<select class='form-control' name='exPart' id='part_id'>";
+							echo "<select name='exPart' id='part_id'>";
 							//if($eventid) // if $_GET exists restrict person options to logged in user
 								foreach ($pdo->query($sql) as $row) {
 									//if($personid==$row['id'])
@@ -127,7 +127,7 @@
 							$pdo = Database::connect();
 							$sql = 'SELECT * FROM suppliers ORDER BY suppName ASC';
 							
-							echo "<select class='form-control' name='exSupp' id='supp_id'>";
+							echo "<select name='exSupp' id='supp_id'>";
 							//if($eventid) // if $_GET exists restrict person options to logged in user
 								foreach ($pdo->query($sql) as $row) {
 									//if($personid==$row['id'])

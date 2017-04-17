@@ -15,7 +15,7 @@ if(isset($_POST['login_btn']))
     {
         $_SESSION['message']="You are now Logged In";
         $_SESSION['username']=$username;
-        header("location:PS_crud.php");
+        header("location:1project.php");
     }
    else
    {
@@ -27,38 +27,40 @@ if(isset($_POST['login_btn']))
 <html>
 <head>
   <title>Login</title>
-  <link rel="stylesheet" type="text/css" href="style.css"/>
+  <!--<link rel="stylesheet" type="text/css" href="style.css"/>-->
+  <meta charset="utf-8">
+  <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="header">
-    <h1>Login</h1>
-</div>
+<div class="container">
+    <div class="span10 offset1">
+        <div class="row">
+			<h1>Login</h1><br>
+		</div>
 <?php
     if(isset($_SESSION['message']))
     {
-         echo "<div id='error_msg'>".$_SESSION['message']."</div>";
+         echo "<label class='control-label'><font color='red'>".$_SESSION['message']."</font></label>";
          unset($_SESSION['message']);
     }
 ?>
 <form method="post" action="index.php">
-  <table>
-     <tr>
-           <td>Username : </td>
-           <td><input type="text" name="username" class="textInput"></td>
-     </tr>
-      <tr>
-           <td>Password : </td>
-           <td><input type="password" name="password" class="textInput"></td>
-     </tr>
-      <tr>
-           <td></td>
-           <td><input type="submit" name="login_btn" class="Log In"></td>
-     </tr>
-  
-</table>
-<br>
-<a href="register.php">Click here to sign up</a>
+
+		   <label class="control-label">Username</label>
+           <div class="controls"><input type="text" name="username" class="textInput"></div>
+		   
+		   <label class="control-label">Password</label>
+           <div class="controls"><input type="password" name="password" class="textInput"></div>
+		   
+           <br><input type="submit" name="login_btn" class="btn btn-success">
+		   
+		   <a class="btn btn-danger" href="register.php">Click here to sign up</a></br>
 </form>
+</div>
+</div>
+</div>
 </body>
 </html>
  
