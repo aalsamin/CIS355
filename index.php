@@ -15,7 +15,7 @@ if(isset($_POST['login_btn']))
     {
         $_SESSION['message']="You are now Logged In";
         $_SESSION['username']=$username;
-        header("location:1project.php");
+        header("location:main.php");
     }
    else
    {

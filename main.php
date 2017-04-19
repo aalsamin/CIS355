@@ -19,15 +19,28 @@ Author    : Abdulmohsen Alsamin
 				color: #CD5C5C;)
 	
 	</style>-->
+<style>
+.toprightcorner {
+    position: absolute;
+    top: 30px;
+    right: 32px;
+    font-size: 18px;
+}
+</style>
 </head>
 <body>
+
+	<div class="toprightcorner">
+		<a href="logout.php" class="btn btn-success">logout</a>
+	</div>
+	
 	<h1 align="center">Abdulmohsen Alsamin</h1>
 	<br>
 	<div style="text-align:center">
 		<a href="parts_crud.php" class="btn btn-success">Parts CRUD</a>
 		<a href="PS_crud.php" class="btn btn-danger">PS CRUD</a>
 		<a href="suppliers_crud.php" class="btn btn-success">Suppliers CRUD</a>
-		</div>
+	</div>
 	</ul><br>
 	<p style=" position: absolute; bottom: 0; left: 0; width: 100%; text-align: center;">&copy; 2017 Alsamin, Abdulmohsen.</p>
 

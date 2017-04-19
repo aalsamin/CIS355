@@ -15,7 +15,7 @@
             </div>
             <div class="row">
 				<p>
-                    <a href="1project.php" class="btn btn-success">Main Page</a>
+                    <a href="main.php" class="btn btn-success">Main Page</a>
 					<a href="logout.php" class="btn btn-success">logout</a>
 
                 </p>
